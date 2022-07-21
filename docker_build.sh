@@ -3,4 +3,5 @@ set -e
 echo "Building the docker"
 docker build -t wasi-sdk-builder:latest .
 echo "Building the package in docker"
-docker run --mount type=bind,src=$PWD,target=/workspace -e NINJA_FLAGS=-v --workdir /workspace wasi-sdk-builder:latest make package
+# docker run --mount type=bind,src=$PWD,target=/workspace -e NINJA_FLAGS=-v --workdir /workspace wasi-sdk-builder:latest make package
+docker run -v .:/opt/wasi-sdk -e NINJA_FLAGS=-v wasi-sdk-builder:latest make package
